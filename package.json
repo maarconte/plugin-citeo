@@ -1,0 +1,23 @@
+{
+	"name": "my-gutenberg-plugin",
+	"version": "1.0.0",
+	"description": "A custom Gutenberg plugin",
+	"scripts": {
+		"start": "wp-env start",
+		"build": "wp-env build"
+	},
+	"dependencies": {
+		"@wordpress/blocks": "^5.0.0",
+		"@wordpress/components": "^5.0.0",
+		"@wordpress/data": "^5.0.0",
+		"@wordpress/i18n": "^5.0.0",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.16.7",
+		"@babel/preset-env": "^7.16.7",
+		"@wordpress/scripts": "^22.2.0",
+		"webpack": "^5.65.0"
+	}
+}
