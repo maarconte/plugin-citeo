@@ -1,0 +1,63 @@
+@mixin generate-margins($index) {
+    @if $index > 0 {
+        @include generate-margins($index - 1);
+    }
+
+    @for $i from 1 through $index {
+        .mb-#{$i} {
+            margin-bottom: ($i * 1rem) !important;
+        }
+
+        .mr-#{$i} {
+            margin-right: ($i * 1rem) !important;
+        }
+
+        .ml-#{$i} {
+            margin-left: ($i * 1rem) !important;
+        }
+
+        .mt-#{$i} {
+            margin-top: ($i * 1rem) !important;
+        }
+    }
+}
+
+@mixin generate-paddings($index) {
+    @if $index > 0 {
+        @include generate-paddings($index - 1);
+    }
+
+    @for $i from 1 through $index {
+        .pb-#{$i} {
+            padding-bottom: ($i * 1rem) !important;
+        }
+
+        .pr-#{$i} {
+            padding-right: ($i * 1rem) !important;
+        }
+
+        .pl-#{$i} {
+            padding-left: ($i * 1rem) !important;
+        }
+
+        .pt-#{$i} {
+            padding-top: ($i * 1rem) !important;
+        }
+    }
+}
+
+@mixin generate-gaps($index) {
+    @if $index > 0 {
+        @include generate-gaps($index - 1);
+    }
+
+    @for $i from 1 through $index {
+        .gap-#{$i} {
+            gap: $i * 1rem;
+        }
+    }
+}
+
+@include generate-margins(5);
+@include generate-paddings(5);
+@include generate-gaps(5);

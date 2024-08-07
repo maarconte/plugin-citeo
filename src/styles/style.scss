@@ -1,0 +1,10 @@
+@import "./vars.scss";
+@import "./display.scss";
+@import "./grid.scss";
+@import "./spacing.scss";
+@import "./buttons.scss";
+
+img {
+    max-width: 100%;
+    height: auto;
+}

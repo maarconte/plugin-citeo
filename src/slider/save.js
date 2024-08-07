@@ -1,5 +1,6 @@
-import Slider from "react-slick";
+import "./style.scss"
 
+import Slider from "react-slick";
 const Save = ({ attributes }) => {
 	const settings = {
 		dots: true,

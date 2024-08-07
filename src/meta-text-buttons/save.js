@@ -1,5 +1,6 @@
-import { RichText, useBlockProps } from "@wordpress/block-editor";
+import "./style.scss"
 
+import { RichText, useBlockProps } from "@wordpress/block-editor";
 const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save();
 

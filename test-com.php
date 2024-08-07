@@ -12,7 +12,7 @@
 if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
 }
-//tototo
+
 function create_block_your_plugin_block_init()
 {
 	register_block_type(__DIR__ . '/build/meta-text-buttons');
