@@ -1,22 +1,17 @@
-import "./style.scss"
+/**
+ * WordPress dependencies
+ */
+import { InnerBlocks } from "@wordpress/block-editor";
 
-import EditGallery from "./edit-gallery";
-import Slider from "react-slick";
-import { useBlockProps } from "@wordpress/block-editor";
-
-const Save = ({ attributes }) => {
-		const blockProps = useBlockProps.save();
-
-	return (
-        <div
-            className="my-slider"
-			{...blockProps}>
-			{/* {attributes.images.map((image,index) => (
-				<img src={image.url} />
-			))} */}
-			<EditGallery images={attributes.images} />
-        </div>
-    );
-};
-
-export default Save;
+/**
+ * The save function defines the way in which the different attributes should
+ * be combined into the final markup, which is then serialized by the block
+ * editor into `post_content`.
+ *
+ * @see https://developer.wordpress.org/block-editor/developers/block-api/block-edit-save/#save
+ *
+ * @return {Element} Element to render.
+ */
+export default function Save() {
+    return <InnerBlocks.Content />;
+}
