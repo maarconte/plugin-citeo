@@ -1,5 +1,5 @@
-
 <?php
+
 /**
  * Plugin Name: Mon Plugin Gutenberg
  * Description: Un plugin WordPress Gutenberg personnalisé.

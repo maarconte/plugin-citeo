@@ -1,26 +1,21 @@
 import "./style.scss"
 
-import Slider from "react-slick";
+import EditGallery from "./edit-gallery";
+import { useBlockProps } from "@wordpress/block-editor";
+
 const Save = ({ attributes }) => {
-	const settings = {
-		dots: true,
-		infinite: true,
-		speed: 500,
-		slidesToShow: 1,
-		slidesToScroll: 1,
-	};
+		const blockProps = useBlockProps.save();
 
 	return (
-		<div className="my-slider">
-			<Slider {...settings}>
-				{attributes.images.map((image) => (
-					<div key={image.id}>
-						<img src={image.url} alt={image.alt} />
-					</div>
-				))}
-			</Slider>
-		</div>
-	);
+        <div
+            className="my-slider"
+			{...blockProps}>
+			{/* {attributes.images.map((image,index) => (
+				<img src={image.url} />
+			))} */}
+			<EditGallery images={attributes.images} />
+        </div>
+    );
 };
 
 export default Save;
