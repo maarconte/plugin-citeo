@@ -1,6 +1,7 @@
 import "./style.scss"
 
 import EditGallery from "./edit-gallery";
+import Slider from "react-slick";
 import { useBlockProps } from "@wordpress/block-editor";
 
 const Save = ({ attributes }) => {
