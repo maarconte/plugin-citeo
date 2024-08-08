@@ -4,19 +4,21 @@
 	"name": "create-block/slider",
 	"version": "0.1.0",
 	"title": "Slider",
-	"category": "media",
-	"icon": "media",
-	"description": "Slider block for images.",
+	"category": "widgets",
+	"icon": "slides",
+	"description": "Display your images in a horizontal carousel.",
 	"example": {},
 	"keywords": [
-		"image"
+		"carousel",
+		"slideshow"
 	],
 	"supports": {
 		"html": false
 	},
-	"textdomain": "default",
+	"textdomain": "wpe",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
+	"render": "file:./render.php",
 	"viewScript": "file:./view.js"
 }
