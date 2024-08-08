@@ -48,7 +48,7 @@ const Edit = (props) => {
                 <div className="col-md-6">
                     <MediaUploadCheck>
                         <MediaUpload
-                            onSelect={(media) => setAttributes({ mediaId: media.id, mediaUrl: media.url })}
+                            onSelect={(media) => setAttributes({ mediaId: media.id, mediaUrl: media.url, mediaAlt: media.alt })}
                             allowedTypes={["image"]}
                             value={attributes.mediaId}
                             render={({ open }) => (
@@ -76,7 +76,7 @@ const Edit = (props) => {
                             <MediaUpload
                                 title={__("Replace image", "awp")}
                                 value={attributes.mediaId}
-                                onSelect={(media) => setAttributes({ mediaId: media.id, mediaUrl: media.url })}
+                                onSelect={(media) => setAttributes({ mediaId: media.id, mediaUrl: media.url, mediaAlt: media.alt })}
                                 allowedTypes={["image"]}
                                 render={({ open }) => (
                                     <Button
@@ -94,7 +94,8 @@ const Edit = (props) => {
                                 onClick={(media) =>
                                     setAttributes({
                                         mediaId: 0,
-                                        mediaUrl: "",
+										mediaUrl: "",
+										mediaAlt: "",
                                     })
                                 }
                                 isDestructive>

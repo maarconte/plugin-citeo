@@ -1,7 +1,8 @@
+import { mediaAndText as icon, media } from "@wordpress/icons";
+
 import Edit from "./edit";
 import Save from "./save";
 import { __ } from "@wordpress/i18n";
-import { mediaAndText as icon } from "@wordpress/icons";
 import metadata from "./block.json";
 import { registerBlockType } from "@wordpress/blocks";
 import { withSelect } from "@wordpress/data";
@@ -28,6 +29,10 @@ registerBlockType(metadata.name, {
 			default: 0,
 		},
 		mediaUrl: {
+			type: "string",
+			default: "",
+		},
+		mediaAlt: {
 			type: "string",
 			default: "",
 		},

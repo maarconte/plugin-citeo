@@ -1,7 +1,9 @@
 import "./style.scss"
 
 import { RichText, useBlockProps } from "@wordpress/block-editor";
+
 const Save = ({ attributes }) => {
+	const { title, content, mediaUrl, mediaAlt, buttons } = attributes;
 	const blockProps = useBlockProps.save();
 
 	return (
@@ -9,11 +11,11 @@ const Save = ({ attributes }) => {
 			<div className="grid mb-2">
 				<div className="col-md-6">
 					<div className="mb-2">
-						<RichText.Content tagName="h2" value={attributes.title} />
-						<RichText.Content tagName="text" value={attributes.content} />
+						<RichText.Content tagName="h2" value={title} />
+						<RichText.Content tagName="text" value={content} />
 					</div>
 					<div className="d-flex gap-1">
-						{attributes.buttons.map((button, index) => (
+						{buttons.map((button, index) => (
 							button?.label && button?.url && (
 								<a
 									key={index}
@@ -28,7 +30,7 @@ const Save = ({ attributes }) => {
 					</div>
 				</div>
 				<div className="col-md-6">
-					<img src={attributes.mediaUrl} alt="" />
+					<img src={mediaUrl} alt={mediaAlt} />
 				</div>
 			</div>
 		</div>

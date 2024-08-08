@@ -12,14 +12,7 @@ registerBlockType(metadata.name, {
     title: metadata.title,
     icon,
     category: "layout",
-    supports: {
-        align: true,
-    },
     attributes: {
-        images: {
-            type: "array",
-            default: [],
-        },
         autoplay: {
             type: "boolean",
             default: false,
