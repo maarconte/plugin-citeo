@@ -16,7 +16,7 @@ const Save = ({ attributes }) => {
 					</div>
 					<div className="d-flex gap-1">
 						{buttons.map((button, index) => (
-							button?.label && button?.url && (
+							button?.label && button?.url && button?.isVisible && (
 								<a
 									key={index}
 									href={button.url}

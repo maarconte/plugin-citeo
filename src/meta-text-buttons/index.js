@@ -6,56 +6,100 @@ import { __ } from "@wordpress/i18n";
 import metadata from "./block.json";
 import { registerBlockType } from "@wordpress/blocks";
 import { withSelect } from "@wordpress/data";
+
 registerBlockType(metadata.name, {
-	title: metadata.title,
-	icon,
-	category: "layout",
-	supports: {
-		align: true,
-	},
-	attributes: {
-		title: {
-			type: "string",
-			source: "html",
-			selector: "h2",
+    title: metadata.title,
+    icon,
+    category: "layout",
+    supports: {
+        splitting: true,
+        typography: {
+            fontSize: true,
+            lineHeight: true,
+            __experimentalFontFamily: true,
+            __experimentalTextDecoration: true,
+            __experimentalFontStyle: true,
+            __experimentalFontWeight: true,
+            __experimentalLetterSpacing: true,
+            __experimentalTextTransform: true,
+            __experimentalWritingMode: true,
+            __experimentalDefaultControls: {
+                fontSize: true,
+            },
+        },
+        color: {
+            gradients: true,
+            link: true,
+            __experimentalDefaultControls: {
+                background: true,
+                text: true,
+            },
 		},
-		content: {
-			type: "string",
-			source: "html",
-			selector: "text",
+
+    },
+    attributes: {
+        title: {
+            type: "rich-text",
+            source: "rich-text",
+            selector: "h1,h2,h3,h4,h5,h6",
+        },
+        level: {
+            type: "number",
+            default: 2,
+        },
+        levelOptions: {
+            type: "array",
+        },
+        content: {
+            type: "rich-text",
+            source: "rich-text",
+            selector: "text",
+            __experimentalRole: "content",
+        },
+        mediaId: {
+            type: "number",
+            default: 0,
+        },
+        mediaUrl: {
+            type: "string",
+            default: "",
+        },
+        mediaAlt: {
+            type: "string",
+            default: "",
+        },
+        buttons: {
+            type: "array",
+            default: [
+                {
+                    label: "",
+                    url: "",
+                    icon: "",
+					iconPosition: "left",
+					isVisible: true
+                },
+                {
+                    label: "",
+                    url: "",
+                    icon: "",
+					iconPosition: "left",
+					isVisible: true
+                },
+            ],
 		},
-		mediaId: {
-			type: "number",
-			default: 0,
+		showButton1: {
+			type: "boolean",
+			default: true,
 		},
-		mediaUrl: {
-			type: "string",
-			default: "",
-		},
-		mediaAlt: {
-			type: "string",
-			default: "",
-		},
-		buttons: {
-			type: "array",
-			default: [
-				{
-					label: "",
-					url: "",
-				},
-				{
-					label: "",
-					url: "",
-				},
-			],
-		},
-	},
-	edit: withSelect((select, props) => {
-		return {
-			media: props.attributes.mediaId
-				? select("core").getMedia(props.attributes.mediaId)
-				: undefined,
-		};
-	})(Edit),
-	save: Save,
+		showButton2: {
+			type: "boolean",
+			default: true,
+		}
+    },
+    edit: withSelect((select, props) => {
+        return {
+            media: props.attributes.mediaId ? select("core").getMedia(props.attributes.mediaId) : undefined,
+        };
+    })(Edit),
+    save: Save,
 });
