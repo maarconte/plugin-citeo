@@ -45,7 +45,7 @@ const Edit = (props) => {
             <div
                 {...blockProps}
                 className="grid mb-2">
-                <div className="col-md-6">
+                <div className="col-desk-6 col-tab-12">
                     {selectedElement === "title" && (
                         <BlockControls group="block">
                             <HeadingLevelDropdown
@@ -101,7 +101,7 @@ const Edit = (props) => {
                         ))}
                     </div>
                 </div>
-                <div className="col-md-6">
+                <div className="col-desk-6 col-tab-12">
                     <MediaUploadCheck>
                         <MediaUpload
                             onSelect={(media) => setAttributes({ mediaId: media.id, mediaUrl: media.url, mediaAlt: media.alt })}

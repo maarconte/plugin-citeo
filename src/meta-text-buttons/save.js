@@ -13,7 +13,7 @@ const Save = ({ attributes }) => {
             className="mb-2"
             {...blockProps}>
             <div className="grid mb-2">
-                <div className="col-md-6">
+                <div className="col-desk-6 col-tab-12">
                     <div className="mb-2">
                         <RichText.Content
                             tagName="h2"
@@ -41,7 +41,7 @@ const Save = ({ attributes }) => {
                         ))}
                     </div>
                 </div>
-                <div className="col-md-6">
+                <div className="col-desk-6 col-tab-12">
                     <img
                         src={mediaUrl}
                         alt={mediaAlt}
