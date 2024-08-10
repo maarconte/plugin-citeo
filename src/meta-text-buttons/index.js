@@ -35,6 +35,7 @@ registerBlockType(metadata.name, {
                 text: true,
             },
 		},
+		highlight: true,
 
     },
     attributes: {
@@ -98,7 +99,8 @@ registerBlockType(metadata.name, {
     },
     edit: withSelect((select, props) => {
         return {
-            media: props.attributes.mediaId ? select("core").getMedia(props.attributes.mediaId) : undefined,
+			media: props.attributes.mediaId ? select("core").getMedia(props.attributes.mediaId) : undefined,
+
         };
     })(Edit),
     save: Save,

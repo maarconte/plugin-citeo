@@ -1,17 +1,25 @@
+import { BlockControls, InspectorControls, __experimentalLinkControl as LinkControl, RichText } from "@wordpress/block-editor";
 import {
-	BlockControls,
-	__experimentalLinkControl as LinkControl,
-	RichText,
-} from "@wordpress/block-editor";
-import { Popover, ToolbarButton, ToolbarDropdownMenu, ToolbarGroup } from "@wordpress/components";
+    __experimentalHeading as Heading,
+    Icon,
+    Panel,
+    PanelBody,
+    Popover,
+    __experimentalRadio as Radio,
+    __experimentalRadioGroup as RadioGroup,
+    ToggleControl,
+    ToolbarButton,
+    ToolbarDropdownMenu,
+    ToolbarGroup,
+} from "@wordpress/components";
 import React, { useState } from "react";
 import { arrowLeft, arrowRight, link, linkOff, symbol } from "@wordpress/icons";
 
 import { __ } from "@wordpress/i18n";
 
-export default function EditButton({ buttons, setAttributes, index, label, url,icon, iconPosition = "left" }) {
-    const [isEditingURL, setIsEditingURL] = useState(false);
-const [isEditingIcon, setIsEditingIcon] = useState(false);
+export default function EditButton({ buttons,button,setAttributes,index,selectedElement,handleSelectElement }) {
+	const { isVisible,url,label,icon,iconPosition = "left" } = button;
+	const [isEditingURL,setIsEditingURL] = useState(false);
     function unlink() {
         setAttributes({
             buttons: buttons.map((button, i) => {
@@ -64,45 +72,93 @@ const [isEditingIcon, setIsEditingIcon] = useState(false);
 		});
 	}
 
-  const iconMarkup = iconPosition === "left" ? <span className="btn__icon">{icon}</span> : null;
-
     return (
         <div>
+            {selectedElement === "button" + index && (
+                <InspectorControls>
+                    <Panel>
+                        <PanelBody title={__("Button Settings")}>
+                            <ToggleControl
+                                label={__("Show Button")}
+                                checked={isVisible}
+                                onChange={(value) => {
+                                    setAttributes({
+                                        buttons: buttons.map((button, i) => {
+                                            if (i === index) {
+                                                return { ...button, isVisible: value };
+                                            }
+                                            return button;
+                                        }),
+                                    });
+                                }}
+							/>
+							<div className="mb-2">
+                            <Heading>{__("Icon")}</Heading>
+                            <RadioGroup
+                                label={__("Icon")}
+                                onChange={(value) => {
+                                    setAttributes({
+                                        buttons: buttons.map((button, i) => {
+                                            if (i === index) {
+                                                return { ...button, icon: value };
+                                            }
+                                            return button;
+                                        }),
+                                    });
+                                }}
+                                checked={icon}>
+                                <Radio value="arrow-left-alt2">
+                                    <Icon icon="arrow-left-alt2" />
+                                    Chevron left
+                                </Radio>
+                                <Radio value="arrow-right-alt2">
+                                    <Icon icon="arrow-right-alt2" />
+                                    Chevron right
+                                </Radio>
+                            </RadioGroup>
+							</div>
+                            <Heading>{__("Icon position")}</Heading>
+                            <RadioGroup
+                                label={__("Icon position")}
+                                onChange={(value) => {
+                                    setAttributes({
+                                        buttons: buttons.map((button, i) => {
+                                            if (i === index) {
+                                                return { ...button, iconPosition: value };
+                                            }
+                                            return button;
+                                        }),
+                                    });
+                                }}
+                                checked={iconPosition}>
+                                <Radio value="left">Left</Radio>
+                                <Radio value="right">Right</Radio>
+                            </RadioGroup>
+                        </PanelBody>
+                    </Panel>
+                </InspectorControls>
+            )}
             <RichText
-                className={`btn btn--primary ${index === 1 ? "btn--outline" : ""} ${!label || !url ? "btn--disabled" : ""}`}
-                withoutInteractiveFormatting
-                tagName="text"
+                className={`btn btn--primary ${index === 1 ? "btn--outline" : ""} ${!label || !url  || !isVisible ? "btn--disabled" : ""} `}
+                tagName="button"
                 value={label}
-                allowedFormats={["core/link"]}
                 onChange={(value) => handleChangeButtonLabel(value)}
                 placeholder={__("Button")}
+                isSelected={selectedElement === "button" + index}
+                onFocus={() => handleSelectElement(`button${index}`)}
+                allowedFormats={[]}
             />
-            <BlockControls
-                group="block"
-                __experimentalShareWithChildBlocks>
-                {!url ? (
+            {selectedElement === "button" + index && (
+                <BlockControls
+                    group="block"
+                    __experimentalShareWithChildBlocks>
                     <ToolbarGroup>
                         <ToolbarButton
                             name="link"
-                            icon={link}
+                            icon={url ? linkOff : link}
                             title={__(`Link ${index + 1}`)}
-                            onClick={() => setIsEditingURL(true)}
-                        />
-                        <ToolbarButton
-                            name="icon"
-                            icon={symbol}
-                            title={__("Icon")}
-                            onClick={() => setIsEditingIcon(true)}
-                        />
-                    </ToolbarGroup>
-                ) : (
-                    <ToolbarGroup>
-                        <ToolbarButton
-                            name="link"
-                            icon={linkOff}
-                            title={__("Unlink")}
-                            onClick={() => unlink()}
-                            isActive
+                            onClick={() => (url ? unlink() : setIsEditingURL(true))}
+                            isActive={url ? true : false}
                         />
                         <ToolbarDropdownMenu
                             icon={symbol}
@@ -111,18 +167,18 @@ const [isEditingIcon, setIsEditingIcon] = useState(false);
                                 {
                                     title: "Right",
                                     icon: arrowRight,
-                                    onClick: () => console.log("right"),
+                                    onClick: () => handleChangeButtonIcon("arrow-left-alt2"),
                                 },
                                 {
                                     title: "Left",
                                     icon: arrowLeft,
-                                    onClick: () => console.log("left"),
+                                    onClick: () => handleChangeButtonIcon("arrow-right-alt2"),
                                 },
                             ]}
                         />
                     </ToolbarGroup>
-                )}
-            </BlockControls>
+                </BlockControls>
+            )}
             {isEditingURL && (
                 <Popover
                     placement="bottom"

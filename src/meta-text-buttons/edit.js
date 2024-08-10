@@ -9,7 +9,7 @@ import {
     useBlockEditingMode,
     useBlockProps,
 } from "@wordpress/block-editor";
-import { Button, Panel, PanelBody, ResponsiveWrapper, ToggleControl } from "@wordpress/components";
+import { Button, PanelBody, ResponsiveWrapper, ToggleControl, ToolbarButton } from "@wordpress/components";
 
 import EditButton from "./edit-button";
 import { __ } from "@wordpress/i18n";
@@ -33,7 +33,12 @@ const Edit = (props) => {
                     return button;
                 }),
         });
-    };
+	};
+
+	const handleSelectElement = (element) => {
+		setSelectedElement(element);
+		console.log(element)
+	}
 
     return (
         <div>
@@ -41,7 +46,7 @@ const Edit = (props) => {
                 {...blockProps}
                 className="grid mb-2">
                 <div className="col-md-6">
-                    {blockEditingMode === "default" && (
+                    {selectedElement === "title" && (
                         <BlockControls group="block">
                             <HeadingLevelDropdown
                                 value={level}
@@ -59,34 +64,39 @@ const Edit = (props) => {
                         placeholder={__("Title...")}
                         onReplace={onReplace}
                         onRemove={() => onReplace([])}
+                        isSelected={selectedElement === "title"}
+                        onFocus={() => handleSelectElement("title")}
                     />
                     <div className="mb-2">
                         <RichText
                             onReplace={onReplace}
                             onRemove={onRemove}
                             identifier="content"
-                            tagName="text"
+                            tagName="p"
                             value={content}
-                            allowedFormats={["core/bold", "core/italic", "core/text-color", "core/strikethrough"]}
+                        //    allowedFormats={["core/bold", "core/italic", "core/text-color", "core/strikethrough"]}
                             onChange={(content) => setAttributes({ content })}
                             placeholder={__("Content...")}
+                            isSelected={selectedElement === "content"}
+                            onFocus={() => handleSelectElement("content")}
                         />
                     </div>
 
                     <div className="d-flex gap-1">
                         {buttons.map((button, index) => (
                             <React.Fragment key={`button_${index}`}>
-                                {button.isVisible ? (
-                                    <EditButton
+								<EditButton
+										button={button}
                                         icon={button.icon}
                                         iconPosition={button.iconPosition}
                                         buttons={buttons}
                                         label={button.label}
                                         url={button.url}
                                         setAttributes={setAttributes}
-                                        index={index}
+										index={index}
+										selectedElement={selectedElement}
+										handleSelectElement={handleSelectElement}
                                     />
-                                ) : null}
                             </React.Fragment>
                         ))}
                     </div>
@@ -149,15 +159,6 @@ const Edit = (props) => {
                     )}
                 </div>
             </div>
-            <PanelBody title="Button Settings">
-                {buttons.map((button, index) => (
-                    <ToggleControl
-                        label={__("Show Button " + (index + 1))}
-                        checked={button.isVisible}
-                        onChange={() => onChangeShowButton(index)}
-                    />
-                ))}
-            </PanelBody>
         </div>
     );
 };
