@@ -28,7 +28,13 @@ export function SwiperInit(container, options = {}) {
         modules: [Autoplay, Keyboard, Navigation, Pagination],
         navigation: options?.navigation ?? false,
         pagination: options?.pagination ?? false,
-        simulateTouch: options?.simulateTouch ?? true,
+		simulateTouch: options?.simulateTouch ?? true,
+		slideRole: "group",
+		a11y: {
+			  				enabled: true,
+    prevSlideMessage: 'Previous slide',
+    nextSlideMessage: 'Next slide',
+  },
     };
 
     return new Swiper(container, parameters);

@@ -56,6 +56,12 @@ $mob-gutter: (
   width: col-width($i, $columns);
   padding-left: $gutter/2;
   padding-right: $gutter/2;
+    @media screen and (max-width: $grid-tablet-breakpoint) {
+    margin-bottom: $grid-tablet-gutter;
+  }
+  @media screen and (max-width: $grid-mobile-breakpoint) {
+    margin-bottom: $grid-mobile-gutter;
+  }
 }
 
 @mixin columns-loop($name, $columns, $gutter) {

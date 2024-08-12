@@ -5,7 +5,6 @@ import { SwiperInit } from "./swiper-init";
 
 document.addEventListener("DOMContentLoaded",() => {
 	const containers = document.querySelectorAll(".swiper");
-	console.log(containers)
     // Return early, and often.
     if (!containers.length) {
         return;

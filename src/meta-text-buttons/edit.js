@@ -37,7 +37,6 @@ const Edit = (props) => {
 
 	const handleSelectElement = (element) => {
 		setSelectedElement(element);
-		console.log(element)
 	}
 
     return (

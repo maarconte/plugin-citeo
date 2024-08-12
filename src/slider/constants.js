@@ -17,7 +17,9 @@ export const DEFAULT_BLOCK_ATTRIBUTES = {
     className: "swiper-slide",
     contentPosition: "bottom left",
     customOverlayColor: "#000000",
-    dimRatio: 20,
+	dimRatio: 20,
+	ariaLabel: "",
+    role: "img",
     layout: {
         type: "constrained",
     },

@@ -32,7 +32,7 @@ export const Slider = memo(({ clientId, attributes }) => {
             ...{
                 autoplay: false,
                 grabCursor: false,
-                simulateTouch: false,
+				simulateTouch: false
             },
         };
 
@@ -78,7 +78,7 @@ export const Slider = memo(({ clientId, attributes }) => {
                         slideToIndex = 0;
                     }
 
-                    slider.slideTo(slideToIndex, 0);
+                    // slider.slideTo(slideToIndex, 0);
                 });
             }
         });
